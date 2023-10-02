@@ -1,4 +1,7 @@
 <?php
+        class Login{
+
+        }
         class Materiel{
                 private $ID_Materiel;
                 private $Reference;
@@ -54,6 +57,39 @@
                   }
                   function setDate_Rappel($a) {
                     $this->Date_Rappel=$a;
+                  }
+
+                  public function retrieve(){
+                    
+                  }
+                  public function create(){
+                    try
+                      {
+                        // préparation de la requete :
+                        $stmt = $this->connex->prepare(
+                          "INSERT INTO tbl_users(first_name,last_name,email_id,contact_no) 
+                              VALUES(:id_Mat, :ref, :Descrip, :date_creat, :date_exp, :date_rapl)");
+                        // affectations des valeurs :
+                        $stmt->bindparam(":id_Mat",$ID_Materiel);
+                        $stmt->bindparam(":ref",$Reference);
+                        $stmt->bindparam(":Descrip",$Description);
+                        $stmt->bindparam(":date_creat",$Date_creation);
+                        $stmt->bindparam(":date_exp",$Date_creation);
+                        $stmt->bindparam(":date_rapl",$Date_creation);
+                        // execution de la reqeute :
+                        return $stmt->execute();
+                      }
+                      catch(PDOException $e) // l'utilisation de "try catch" pour vérifier si on a des erreurs, 
+                      {					   // et afficher des messages.
+                        echo $e->getMessage();	
+                        return false;
+                      }	
+                  }
+                  public function update(){
+
+                  }
+                  public function delete(){
+
                   }
                 
         }
@@ -114,6 +150,20 @@
                   }
                   function setDate_Rappel_doc($a) {
                     $this->Date_Rappel_doc=$a;
+                  }
+
+                  //Methode CRUD //Class DAO
+                  public function retrieve(){
+                    
+                  }
+                  public function create(){
+
+                  }
+                  public function update(){
+
+                  }
+                  public function delete(){
+
                   }
                 
         }
