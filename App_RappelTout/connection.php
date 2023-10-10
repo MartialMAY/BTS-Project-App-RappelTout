@@ -2,8 +2,8 @@
 
 
 
-$_SESSION["User"]=$_POST["utilisateur"];
-$_SESSION["Password"]=$_POST["MotDePasse"];
+$_SESSION["utilisateur"]=$_POST["utilisateur"];
+$_SESSION["MotDePasse"]=$_POST["MotDePasse"];
 
 
 
@@ -11,7 +11,7 @@ $_SESSION["Password"]=$_POST["MotDePasse"];
 
 try
 {
-    $connex = new PDO('mysql:localhost;dbname=AppRappelTo', $_POST["utilisateur"], $_POST["MotDePasse"]);  
+    $connex = new PDO('mysql:localhost;dbname=AppRappelTo', $_SESSION["utilisateur"], $_SESSION["MotDePasse"]);  
     if($_POST["utilisateur"] !== ""){
         $user = $_POST["utilisateur"];
         require_once("accueil.php");
