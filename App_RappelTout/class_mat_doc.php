@@ -52,22 +52,22 @@
                     $this->Date_Rappel=$a;
                   }
 
-                  function create($connex) {
+                  function create() {
                     
-                   
-                      
-                        $sql="INSERT INTO Materiel (Reference, Description, Date_creation, Date_Exp, Date_Rappel)  VALUES (:ref, :Descrip, :date_creat, :date_exp, :date_rapl)";
-                        $stmt=$connex->prepare($sql);
-                      
+                    include "connection.php";
+                  
+                    $sql="INSERT INTO Materiel (Reference, Description, Date_creation, Date_Exp, Date_Rappel)  VALUES (:ref, :Descrip, :date_creat, :date_exp, :date_rapl)";
+                    $stmt=$connex->prepare($sql);
+                  
 
-                        $stmt->bindParam(":ref", $_SESSION["Ref_mat"]);
-                        $stmt->bindParam(":Descrip", $_SESSION['Description_mat']);
-                        $stmt->bindParam(":date_creat", $_SESSION['date_creation']);
-                        $stmt->bindParam(":date_exp", $_SESSION['date_exp']);
-                        $stmt->bindParam(":date_rapl", $_SESSION['date_rappel']);
-            
-                      
-                        $stmt->execute();
+                    $stmt->bindParam(":ref", $_SESSION["Ref_mat"]);
+                    $stmt->bindParam(":Descrip", $_SESSION['Description_mat']);
+                    $stmt->bindParam(":date_creat", $_SESSION['date_creation']);
+                    $stmt->bindParam(":date_exp", $_SESSION['date_exp']);
+                    $stmt->bindParam(":date_rapl", $_SESSION['date_rappel']);
+        
+                  
+                    $stmt->execute();
                    
                 }
             
