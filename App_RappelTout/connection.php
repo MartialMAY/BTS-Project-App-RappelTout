@@ -2,8 +2,9 @@
 
 
 
-$_SESSION["utilisateur"]=$_POST["utilisateur"];
-$_SESSION["MotDePasse"]=$_POST["MotDePasse"];
+
+$_POST["utilisateur"]=$_SESSION["utilisateur"];
+$_POST["MotDePasse"]=$_SESSION["MotDePasse"];
 
 
 
