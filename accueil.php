@@ -1,16 +1,12 @@
-<?php  
- //login_success.php  
- session_start();  
- if(isset($_SESSION["User"]))  
- {  
-      echo '<h3>Login Success, Welcome - '.$_SESSION["User"].'</h3>';  
-      echo '<br /><br /><a href="logout.php">Logout</a>';  
- }  
- else  
- {  
-      header("location:connection.php");  
- }  
- ?>  
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['User'])) {
+    header('Location: Page_login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

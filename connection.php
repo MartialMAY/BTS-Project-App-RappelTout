@@ -1,44 +1,36 @@
 <?php
+
+// Connexion à la base de données
 session_start();
 
+// Récupération des données du formulaire
+$nom = $_POST["utilisateur"];
+$mot_de_passe = $_POST["MotDePasse"];
 
-try  
- {  
-    $connex = new PDO('mysql:host=localhost;dbname=rappelto', $_POST["utilisateur"], $_POST["MotDePasse"]);
-    $connex->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      if(isset($_POST["login"]))  
-      {  
-           if(empty($_POST["utilisateur"]) || ($_POST["MotDePasse"]))  
-           {  
-            echo 'Nom d\'utilisateur et/ou mot de passe incorrect(s) !';
-           }  
-           else  
-           {  
-                $query = "SELECT * FROM login WHERE user = :user AND password = :password";  
-                $statement = $connex->prepare($query);  
-                $statement->execute(  
-                    array(  
-                         'user'     =>     $_POST["utilisateur"],  
-                         'password'     =>    $_POST["MotDePasse"] 
-                    )  
-               );  
-                $count = $statement->rowCount();  
-                if($count > 0)  
-                {  
-                    $_SESSION["User"] = $_POST["utilisateur"];  
-                    
-                }  
-                else  
-                {  
-                     $message = '<label>Wrong Data</label>';  
-                }  
-           }  
-      }  
- }  
- catch(PDOException $error)  
- {  
-      $message = $error->getMessage();  
- }  
+// Vérification des informations de l'utilisateur
+
+try {
+    $connex = new PDO('mysql:host=localhost;dbname=rappelto', $nom, $mot_de_passe);
+} catch (PDOException $e) {
+    echo 'Erreur de connexion : ' . $e->getMessage();
+    exit();
+}
+
+
+
+// Vérification des informations de l'utilisateur
+$query = $connex->prepare('SELECT * FROM login WHERE user = :user AND password = :password');
+$query->execute(array('user' => $nom, 'password' => $mot_de_passe));
+
+if ($query->rowCount() == 1) {
+    // L'utilisateur est authentifié
+    $_SESSION['User'] = $nom;
+    header('Location: accueil.php');
+} else {
+    // L'utilisateur n'est pas authentifié
+    echo 'Nom d\'utilisateur ou mot de passe incorrect.';
+}
+
  
 
 
