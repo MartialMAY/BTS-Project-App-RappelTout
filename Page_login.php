@@ -25,7 +25,7 @@
 
                    
                     
-                        <input type="submit" id='submit' value='Se connecter' name="btn" >
+                        <input type="submit" id='submit' value='Se connecter' name="login" >
                     
 
                     
